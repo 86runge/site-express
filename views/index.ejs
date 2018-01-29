@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/css/style.css'/>
+    <link rel="stylesheet" href="/plugins/bootstrap/css/bootstrap.css">
+</head>
+<body>
+<h1><%= title %></h1>
+<p>Welcome to <%= title %></p>
+<form method="post" id="user_form">
+    <div class="form-group">
+        <label for="id_name" class="control-label">姓名：</label>
+        <input type="text" id="id_name" class="form-control" name="name">
+    </div>
+    <div class="form-group">
+        <label for="id_age" class="control-label">年龄：</label>
+        <input type="text" id="ids_age" class="form-control" name="age">
+    </div>
+    <div class="form-group">
+        <label for="id_height" class="control-label">身高：</label>
+        <input type="text" id="id_height" class="form-control" name="height">
+    </div>
+    <div class="form-group">
+        <label for="id_weight" class="control-label">体重：</label>
+        <input type="text" id="id_weight" class="form-control" name="weight">
+    </div>
+    <div class="form-group">
+        <label for="id_weight" class="control-label">时间：</label>
+        <select class="form-control">
+            <option value="">--请选择--</option>
+            <option value="">--阿里嘎多--</option>
+            <option value="">--搜嘎斯内--</option>
+            <option value="">--求德玛得--</option>
+        </select>
+    </div>
+    <button type="button" id="add_user" class="btn btn-primary">添加</button>
+    <button type="reset" id="add_user" class="btn btn-primary">重新填写</button>
+</form>
+
+<form method="post" id="file_upload">
+    <input type="file" class="form-control" name="file_name">
+    <input type="button" id="upload_file" value="上传">
+</form>
+
+</body>
+<script src="/jquery/jquery.js"></script>
+<script src="/plugins/bootstrap/js/bootstrap.js"></script>
+<script src="/js/index.js"></script>
+</html>
