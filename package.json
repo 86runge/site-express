@@ -19,7 +19,7 @@
     "morgan": "~1.5.1",
     "mysql": "latest",
     "mysql2": "latest",
-    "sequelize": "~4.28.6",
+    "sequelize": "~5.21.2",
     "serve-favicon": "~2.2.0"
   },
   "devDependencies": {
