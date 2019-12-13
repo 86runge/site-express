@@ -25,15 +25,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', index);
 app.use('/users', users);
 
-// 连接数据库
-var sqldb = require('./sqldb');
-
-sqldb.sequelize.sync({force: false}).then(function () {
-    console.log("Server successed to start");
-}).catch(function (err) {
-    console.log("Server failed to start due to error: %s", err);
-});
-
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
     var err = new Error('Not Found');

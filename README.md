@@ -5,8 +5,7 @@
 ## 技术栈
 
 ```
-express + webpack + mysql + sequelize
-
+node + express + mysql + sequelize
 ```
 
 ## 说明
