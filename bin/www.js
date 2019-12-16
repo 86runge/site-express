@@ -86,5 +86,6 @@ function onListening() {
   var bind = typeof addr === 'string'
     ? 'pipe ' + addr
     : 'port ' + addr.port;
-  debug('Listening on ' + bind);
+  console.log('\033[1');
+  console.log('\033[42;30m DONE \033[40;32m node server is start Listening on ' + bind +'\033[0m');
 }
