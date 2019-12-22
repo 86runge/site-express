@@ -1,5 +1,5 @@
 // 连接数据库
-var sqldb = require('../sqldb');
+var sqldb = require('../modular');
 
 sqldb.sequelize.sync().then(function () {
     sqldb.sequelize.close();

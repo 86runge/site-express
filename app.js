@@ -1,46 +1,54 @@
-var express = require('express');
-var path = require('path');
-var favicon = require('serve-favicon');
-var logger = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
+const express = require('express');
+const favicon = require('express-favicon');
+const logger = require('morgan');
+const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
+const session = require('express-session');
 
-var index = require('./routes/index');
-var users = require('./routes/users');
+// express 中间建
+const app = express();
 
-var app = express();
+app.use(favicon(__dirname + '/public/favicon.ico'));
 
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
-
-// uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
-app.use(logger('dev'));
+// 获取前端传过来的数据
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
+
+// 打印日志
+app.use(logger('dev'));
+
+// cookie
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', index);
-app.use('/users', users);
+// session
+app.use(session({
+    secret: 'site', // 可以随便写。 一个 String 类型的字符串，作为服务器端生成 session 的签名
+    name: 'session_id', // 保存在本地cookie的一个名字 默认connect.sid  可以不设置
+    resave: false, // 强制保存 session 即使它并没有变化,。默认为 true。建议设置成 false。
+    saveUninitialized: true, // 强制将未初始化的 session 存储。  默认值是true  建议设置成true
+    cookie: {
+        maxAge: 5000 // 过期时间
+    }, // secure https这样的情况才可以访问cookie 设置过期时间比如是30分钟，只要浏览页面，30分钟没有操作的话就过期
+    rolling: true // 在每次请求时强行设置 cookie，这将重置 cookie 过期时间（默认：false）
+}));
 
-// catch 404 and forward to error handler
-app.use(function (req, res, next) {
-    var err = new Error('Not Found');
-    err.status = 404;
-    next(err);
+// 允许跨域
+app.all('*', (req, res, next) => {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Content-Type,Content-Length, Authorization, Accept,X-Requested-With");
+    res.header("Access-Control-Allow-Methods", "PUT,POST,GET,DELETE,OPTIONS");
+    res.header("X-Powered-By", ' 3.2.1');
+    if (req.method === "OPTIONS") res.send(200);/*让options请求快速返回*/
+    else next();
 });
 
-// error handler
-app.use(function (err, req, res, next) {
-    // set locals, only providing error in development
-    res.locals.message = err.message;
-    res.locals.error = req.app.get('env') === 'development' ? err : {};
-
-    // render the error page
-    res.status(err.status || 500);
-    res.render('error');
+// 加载api
+const product = require('./router/product');
+const order = require('./router/order');
+const serverList = [].concat(product, order);
+serverList.forEach((item) => {
+    console.log((item));
+    app.use('/', item);
 });
 
 module.exports = app;
