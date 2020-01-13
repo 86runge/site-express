@@ -4,6 +4,7 @@ const logger = require('morgan');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
+const memcachedStore = require('connect-memcached')(session);
 
 // express 中间建
 const app = express();
@@ -27,9 +28,13 @@ app.use(session({
     resave: false, // 强制保存 session 即使它并没有变化,。默认为 true。建议设置成 false。
     saveUninitialized: true, // 强制将未初始化的 session 存储。  默认值是true  建议设置成true
     cookie: {
-        maxAge: 5000 // 过期时间
+        maxAge: 5000 * 60 // 过期时间
     }, // secure https这样的情况才可以访问cookie 设置过期时间比如是30分钟，只要浏览页面，30分钟没有操作的话就过期
-    rolling: true // 在每次请求时强行设置 cookie，这将重置 cookie 过期时间（默认：false）
+    rolling: true, // 在每次请求时强行设置 cookie，这将重置 cookie 过期时间（默认：false）
+    store: new memcachedStore({
+        hosts: ['127.0.0.1:11211'], //this should be where your Memcached server is running
+        secret: 'site_key' // Optionally use transparent encryption for memcache session data
+    })
 }));
 
 // 允许跨域
@@ -43,11 +48,15 @@ app.all('*', (req, res, next) => {
 });
 
 // 加载api
+const user = require('./router/user');
+const systemSettings = require('./router/system-settings');
+const content = require('./router/content');
+const document = require('./router/document');
 const product = require('./router/product');
 const order = require('./router/order');
-const serverList = [].concat(product, order);
+const finance = require('./router/finance');
+const serverList = [].concat(user, systemSettings, content, document, product, order, finance);
 serverList.forEach((item) => {
-    console.log((item));
     app.use('/', item);
 });
 

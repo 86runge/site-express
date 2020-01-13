@@ -15,7 +15,7 @@ module.exports = function (sequelize, DataTypes) {
         },
         login_id: {
             type: DataTypes.UUID,
-            comment: '登陆账号'
+            comment: '登陆账号id'
         },
         login_ip: {
             type: DataTypes.CHAR(50),

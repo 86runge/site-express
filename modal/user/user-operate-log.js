@@ -21,6 +21,10 @@ module.exports = function (sequelize, DataTypes) {
             type: DataTypes.TEXT,
             comment: '操作描述'
         },
+        operate_type: {
+            type: DataTypes.INTEGER,
+            comment: '操作类型'
+        },
         operate_ip: {
             type: DataTypes.CHAR(50),
             comment: '操作IP'

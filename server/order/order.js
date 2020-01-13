@@ -4,7 +4,7 @@ const order_router = express.Router();
 const modular = require('../../modular');
 const Order = modular.order;
 
-order_router.get('/order_list', (req, res, next) => {
+order_router.get('/order/order_list', (req, res, next) => {
     return modular.sequelize.transaction(function (t) {
         return Order.findAll({
             transaction: t
@@ -17,7 +17,7 @@ order_router.get('/order_list', (req, res, next) => {
     });
 });
 
-order_router.get('/add_order', (req, res, next) => {
+order_router.post('/order/add_order', (req, res, next) => {
     const obj = {
         order_no: String(parseInt(Math.random() * 1000000000 + 1)),
         price: parseInt(Math.random() * 10000 + 1) / 100,
@@ -26,8 +26,6 @@ order_router.get('/add_order', (req, res, next) => {
         logistics_fee: parseInt(Math.random() * 100 + 1) / 100,
         product_count: 9,
     };
-    console.log(obj);
-    console.log(typeof obj.order_name);
     return modular.sequelize.transaction(function (t) {
         return Order.create(obj, {
             transaction: t

@@ -45,3 +45,9 @@ const rule_type = {
 const send_status = {
 
 };
+
+// 操作类型
+// 0新增 1修改 2删除
+const operate_type = {
+
+}

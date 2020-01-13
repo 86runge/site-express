@@ -4,7 +4,7 @@ const product_router = express.Router();
 const modular = require('../../modular');
 const Product = modular.product;
 
-product_router.get('/product_list', function (req, res, next) {
+product_router.get('/product/product_list', function (req, res, next) {
     return modular.sequelize.transaction(function (t) {
         return Product.findAll({
             transaction: t
@@ -17,7 +17,7 @@ product_router.get('/product_list', function (req, res, next) {
     });
 });
 
-product_router.get('/add_product', function (req, res, next) {
+product_router.post('/product/add_product', function (req, res, next) {
     const obj = {
         product_name: '这是商品' + String(parseInt(Math.random() * 10 + 1)),
         marque: String(parseInt(Math.random() * 10 + 1)),
@@ -29,8 +29,6 @@ product_router.get('/add_product', function (req, res, next) {
         warning_stock: 50,
         integral: 200,
     };
-    console.log(obj);
-    console.log(typeof obj.product_name);
     return modular.sequelize.transaction(function (t) {
         return Product.create(obj, {
             transaction: t

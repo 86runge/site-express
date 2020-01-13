@@ -13,9 +13,17 @@ module.exports = function (sequelize, DataTypes) {
             defaultValue: DataTypes.UUIDV1,
             comment: 'id'
         },
-        user_name: {
+        username: {
             type: DataTypes.CHAR(30),
             comment: '用户名'
+        },
+        name_cn: {
+            type: DataTypes.CHAR(30),
+            comment: '姓名'
+        },
+        nick: {
+            type: DataTypes.CHAR(30),
+            comment: '昵称'
         },
         phone: {
             type: DataTypes.CHAR(30),
