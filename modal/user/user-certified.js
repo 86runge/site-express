@@ -27,6 +27,7 @@ module.exports = function (sequelize, DataTypes) {
         },
         cert_exp: {
             type: DataTypes.DATE,
+            defaultValue: DataTypes.NOW,
             comment: '证件过期时间'
         }
     }, {

@@ -1,12 +1,20 @@
+// 系统依赖
+const fs = require('fs');
+const path = require('path');
+// express依赖
 const express = require('express');
 const favicon = require('express-favicon');
-const logger = require('morgan');
 const bodyParser = require('body-parser');
+// 缓存依赖
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const memcachedStore = require('connect-memcached')(session);
+// 日志依赖
+const logger = require('morgan');
+const fileStreamRotator = require('file-stream-rotator');
+const logDirectory = path.join(__dirname, 'logs');
 
-// express 中间建
+// express 中间件
 const app = express();
 
 app.use(favicon(__dirname + '/public/favicon.ico'));
@@ -15,8 +23,19 @@ app.use(favicon(__dirname + '/public/favicon.ico'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 
-// 打印日志
-app.use(logger('dev'));
+// 允许跨域
+app.all('*', (req, res, next) => {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Content-Type,Content-Length, Authorization, Accept,X-Requested-With");
+    res.header("Access-Control-Allow-Methods", "PUT,POST,GET,DELETE,OPTIONS");
+    res.header("X-Powered-By", ' 3.2.1');
+
+    // console.log('req', req);
+    // console.log('res', JSON.stringify(res));
+
+    if (req.method === "OPTIONS") res.send(200);/*让options请求快速返回*/
+    else next();
+});
 
 // cookie
 app.use(cookieParser());
@@ -37,15 +56,39 @@ app.use(session({
     })
 }));
 
-// 允许跨域
-app.all('*', (req, res, next) => {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Content-Type,Content-Length, Authorization, Accept,X-Requested-With");
-    res.header("Access-Control-Allow-Methods", "PUT,POST,GET,DELETE,OPTIONS");
-    res.header("X-Powered-By", ' 3.2.1');
-    if (req.method === "OPTIONS") res.send(200);/*让options请求快速返回*/
-    else next();
+// 打印日志
+// 确保存储的路径存在
+fs.existsSync(logDirectory) || fs.mkdirSync(logDirectory);
+
+// 自定义token
+logger.token('localDate',function getDate(req) {
+    let date = new Date();
+    return date.toLocaleString()
 });
+// 创建输出流
+var accessLogStream = fileStreamRotator.getStream({
+    date_format: 'YYYYMMDD',
+    filename: path.join(logDirectory, '%DATE%-access.log'),
+    frequency: 'daily',
+    verbose: false
+});
+// 创建输出流
+var errorLogStream = fileStreamRotator.getStream({
+    date_format: 'YYYYMMDD', //日期类型
+    filename: path.join(logDirectory, '%DATE%-error.log'), //文件名
+    frequency: 'daily', //每天的频率
+    verbose: false
+});
+
+// 写正常访问请求的log日志
+app.use(logger(':localDate :remote-addr :method :url :status :res[content-length] - :response-time ms', {stream: accessLogStream}));
+// 写访问出错的log日志
+app.use(logger(':localDate :remote-addr :method :url :status :res[content-length] - :response-time ms', {
+    skip: function (req, res) {
+        return res.statusCode < 400
+    },
+    stream: errorLogStream
+}));
 
 // 加载api
 const user = require('./router/user');

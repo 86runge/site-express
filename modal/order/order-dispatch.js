@@ -35,6 +35,7 @@ module.exports = function (sequelize, DataTypes) {
         },
         created_time: {
             type: DataTypes.DATE,
+            defaultValue: DataTypes.NOW,
             comment: '调度日期'
         }
     })

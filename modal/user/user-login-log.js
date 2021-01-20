@@ -23,6 +23,7 @@ module.exports = function (sequelize, DataTypes) {
         },
         login_time: {
             type: DataTypes.DATE,
+            defaultValue: DataTypes.NOW,
             comment: '登录时间'
         },
         login_params: {

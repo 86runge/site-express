@@ -1,8 +1,11 @@
 // 连接数据库
-var sqldb = require('../modular');
+const sqlDb = require('../modular');
 
-sqldb.sequelize.sync().then(function () {
-    sqldb.sequelize.close();
+/**
+ * 编译模型生成数据库
+ */
+sqlDb.sync({ alter: true }).then(function () {
+    sqlDb.close();
     console.log("Table created");
 }).catch(function (err) {
     console.log("Server failed to start due to error: %s", err);

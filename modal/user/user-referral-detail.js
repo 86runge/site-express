@@ -32,6 +32,7 @@ module.exports = function (sequelize, DataTypes) {
         },
         register_time: {
             type: DataTypes.DATE,
+            defaultValue: DataTypes.NOW,
             comment: '注册时间'
         }
     }, {

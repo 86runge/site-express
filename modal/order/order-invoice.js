@@ -68,6 +68,7 @@ module.exports = function (sequelize, DataTypes) {
         },
         vat_created_time: {
             type: DataTypes.DATE,
+            defaultValue: DataTypes.NOW,
             comment: '开票时间'
         }
     })

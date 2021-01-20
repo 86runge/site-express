@@ -83,14 +83,17 @@ module.exports = function (sequelize, DataTypes) {
         },
         auditor_audited_time: {
             type: DataTypes.DATE,
+            defaultValue: DataTypes.NOW,
             comment: '订单审核员审核时间'
         },
         storekeeper_audited_time: {
             type: DataTypes.DATE,
+            defaultValue: DataTypes.NOW,
             comment: '仓管员审核时间'
         },
         accountant_audited_time: {
             type: DataTypes.DATE,
+            defaultValue: DataTypes.NOW,
             comment: '财务审核时间'
         }
     })

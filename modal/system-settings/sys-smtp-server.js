@@ -77,10 +77,12 @@ module.exports = function (sequelize, DataTypes) {
         },
         created_time: {
             type: DataTypes.DATE,
+defaultValue: DataTypes.NOW,
             comment: '创建时间'
         },
         last_send_time: {
             type: DataTypes.DATE,
+defaultValue: DataTypes.NOW,
             comment: '最后发送时间'
         }
     })

@@ -39,10 +39,12 @@ module.exports = function (sequelize, DataTypes) {
         },
         start_time: {
             type: DataTypes.DATE,
+            defaultValue: DataTypes.NOW,
             comment: '生效时间'
         },
         end_time: {
             type: DataTypes.DATE,
+            defaultValue: DataTypes.NOW,
             comment: '失效时间'
         },
         sort: {
@@ -56,6 +58,7 @@ module.exports = function (sequelize, DataTypes) {
         },
         created_time: {
             type: DataTypes.DATE,
+            defaultValue: DataTypes.NOW,
             comment: '创建时间'
         }
     })

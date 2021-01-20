@@ -39,10 +39,12 @@ module.exports = function (sequelize, DataTypes) {
         },
         created_time: {
             type: DataTypes.DATE,
+            defaultValue: DataTypes.NOW,
             comment: '创建时间'
         },
         audit_time: {
             type: DataTypes.DATE,
+            defaultValue: DataTypes.NOW,
             comment: '审核时间'
         },
         audit_note: {

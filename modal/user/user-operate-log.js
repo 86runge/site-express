@@ -31,6 +31,7 @@ module.exports = function (sequelize, DataTypes) {
         },
         operate_time: {
             type: DataTypes.DATE,
+            defaultValue: DataTypes.NOW,
             comment: '操作时间'
         },
         operate_params: {

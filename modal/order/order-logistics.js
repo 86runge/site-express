@@ -83,14 +83,17 @@ module.exports = function (sequelize, DataTypes) {
         },
         logistics_create_time: {
             type: DataTypes.DATE,
+            defaultValue: DataTypes.NOW,
             comment: '发货时间'
         },
         logistics_update_time: {
             type: DataTypes.DATE,
+            defaultValue: DataTypes.NOW,
             comment: '物流更新时间'
         },
         logistics_settlement_time: {
             type: DataTypes.DATE,
+            defaultValue: DataTypes.NOW,
             comment: '物流结算时间'
         },
         logistics_payment_channel: {
@@ -107,6 +110,7 @@ module.exports = function (sequelize, DataTypes) {
         },
         reconciliation_time: {
             type: DataTypes.DATE,
+            defaultValue: DataTypes.NOW,
             comment: '物流公司对账日期'
         },
     })

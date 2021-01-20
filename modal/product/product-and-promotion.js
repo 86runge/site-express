@@ -27,10 +27,12 @@ module.exports = function (sequelize, DataTypes) {
         },
         start_time: {
             type: DataTypes.DATE,
+            defaultValue: DataTypes.NOW,
             comment: '开始时间'
         },
         end_time: {
             type: DataTypes.DATE,
+            defaultValue: DataTypes.NOW,
             comment: '结束时间'
         },
         price: {
@@ -51,6 +53,7 @@ module.exports = function (sequelize, DataTypes) {
         },
         created_time: {
             type: DataTypes.DATE,
+            defaultValue: DataTypes.NOW,
             comment: '创建时间'
         }
     })

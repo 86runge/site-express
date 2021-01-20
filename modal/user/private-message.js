@@ -55,14 +55,17 @@ module.exports = function (sequelize, DataTypes) {
         },
         read_time: {
             type: DataTypes.DATE,
+            defaultValue: DataTypes.NOW,
             comment: '阅读时间'
         },
         created_time: {
             type: DataTypes.DATE,
+            defaultValue: DataTypes.NOW,
             comment: '创建时间'
         },
         send_time: {
             type: DataTypes.DATE,
+            defaultValue: DataTypes.NOW,
             comment: '发送时间'
         }
     }, {

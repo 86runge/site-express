@@ -35,6 +35,7 @@ module.exports = function (sequelize, DataTypes) {
         },
         settlement_time: {
             type: DataTypes.DATE,
+            defaultValue: DataTypes.NOW,
             comment: '结算时间'
         }
     })

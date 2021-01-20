@@ -56,6 +56,7 @@ module.exports = function (sequelize, DataTypes) {
         },
         birthday: {
             type: DataTypes.DATE,
+            defaultValue: DataTypes.NOW,
             comment: '出生日期'
         },
         education_id: {
@@ -68,6 +69,7 @@ module.exports = function (sequelize, DataTypes) {
         },
         register_time: {
             type: DataTypes.DATE,
+            defaultValue: DataTypes.NOW,
             comment: '注册时间'
         },
         login_ip: {
@@ -76,6 +78,7 @@ module.exports = function (sequelize, DataTypes) {
         },
         login_time: {
             type: DataTypes.DATE,
+            defaultValue: DataTypes.NOW,
             comment: '登录时间'
         },
         login_count: {

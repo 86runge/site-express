@@ -72,6 +72,7 @@ module.exports = function (sequelize, DataTypes) {
         },
         statistics_time: {
             type: DataTypes.DATE,
+            defaultValue: DataTypes.NOW,
             comment: '出入库时间'
         }
     })

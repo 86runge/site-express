@@ -1,7 +1,7 @@
 const express = require('express');
 const user_router = express.Router();
 
-const interfaces = require('../../utils/interfaces');
+const interfaces = require('../../utils/getIPAddress');
 
 const modular = require('../../modular');
 const User = modular.user;
@@ -79,6 +79,13 @@ user_router.put('/user/forgot', (req, res) => {
     }).then((user_find) => {
         if (user_find) {
             User.update({password: req.body.password}, {where: {username: req.body.username}}).then(() => {
+                // 记录操作日志 0新增 1修改 2删除
+                UserOperateLog.create({
+                    user_id: user_id.id,
+                    operate_type: 1,
+                    operate_ip: interfaces,
+                    operate_time: Date.now()
+                });
                 return res.json({
                     code: 0,
                     success: true,

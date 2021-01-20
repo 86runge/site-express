@@ -7,6 +7,7 @@
     "mysql": "node bin/mysql.js"
   },
   "dependencies": {
+    "amqplib": "^0.6.0",
     "body-parser": "~1.10.1",
     "co": "^4.6.0",
     "connect-memcached": "^1.0.0",
@@ -14,10 +15,11 @@
     "express": "~4.10.6",
     "express-favicon": "^2.0.1",
     "express-session": "^1.17.0",
+    "file-stream-rotator": "^0.5.7",
     "morgan": "~1.5.1",
     "mysql": "~2.17.1",
     "mysql2": "~2.0.2",
-    "sequelize": "~4.28.6"
+    "sequelize": "^6.3.5"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",

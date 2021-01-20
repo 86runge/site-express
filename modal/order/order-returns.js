@@ -75,10 +75,12 @@ module.exports = function (sequelize, DataTypes) {
         },
         logistics_update_time: {
             type: DataTypes.DATE,
+            defaultValue: DataTypes.NOW,
             comment: '物流更新时间'
         },
         logistics_delivery_time: {
             type: DataTypes.DATE,
+            defaultValue: DataTypes.NOW,
             comment: '物流发货时间'
         },
         returns_type: {
@@ -99,10 +101,12 @@ module.exports = function (sequelize, DataTypes) {
         },
         return_submit_time: {
             type: DataTypes.DATE,
+            defaultValue: DataTypes.NOW,
             comment: '退货申请时间'
         },
         handling_time: {
             type: DataTypes.DATE,
+            defaultValue: DataTypes.NOW,
             comment: '退货处理时间'
         },
         returns_reason: {

@@ -50,8 +50,8 @@ module.exports = function (sequelize, DataTypes) {
             comment: '银行卡持卡人姓名'
         },
         submit_remark: {
-          type: DataTypes.TEXT,
-          comment: '充值备注'
+            type: DataTypes.TEXT,
+            comment: '充值备注'
         },
         auditor_id: {
             type: DataTypes.UUID,
@@ -59,6 +59,7 @@ module.exports = function (sequelize, DataTypes) {
         },
         audit_time: {
             type: DataTypes.DATE,
+            defaultValue: DataTypes.NOW,
             comment: '审核时间'
         },
         audit_remark: {
@@ -76,10 +77,12 @@ module.exports = function (sequelize, DataTypes) {
         },
         created_time: {
             type: DataTypes.DATE,
+            defaultValue: DataTypes.NOW,
             comment: '创建时间'
         },
         updated_time: {
             type: DataTypes.DATE,
+            defaultValue: DataTypes.NOW,
             comment: '更新时间'
         },
     })

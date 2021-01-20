@@ -73,14 +73,17 @@ module.exports = function (sequelize, DataTypes) {
         },
         order_time: {
             type: DataTypes.DATE,
+            defaultValue: DataTypes.NOW,
             comment: '下单时间'
         },
         payment_time: {
             type: DataTypes.DATE,
+            defaultValue: DataTypes.NOW,
             comment: '付款时间'
         },
         delivery_time: {
             type: DataTypes.DATE,
+            defaultValue: DataTypes.NOW,
             comment: '发货时间'
         },
         customer_id: {
@@ -97,6 +100,7 @@ module.exports = function (sequelize, DataTypes) {
         },
         order_settlement_time: {
             type: DataTypes.DATE,
+            defaultValue: DataTypes.NOW,
             comment: '订单结算时间'
         }
     }, {

@@ -35,14 +35,17 @@ module.exports = function (sequelize, DataTypes) {
         },
         captcha_exp: {
             type: DataTypes.DATE,
+            defaultValue: DataTypes.NOW,
             comment: '认证验证码过期时间'
         },
         submit_time: {
             type: DataTypes.DATE,
+            defaultValue: DataTypes.NOW,
             comment: '认证申请时间'
         },
         audit_time: {
             type: DataTypes.DATE,
+            defaultValue: DataTypes.NOW,
             comment: '认证审核时间'
         },
         submit_remark: {

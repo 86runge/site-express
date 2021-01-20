@@ -90,10 +90,12 @@ module.exports = function (sequelize, DataTypes) {
         },
         created_time: {
             type: DataTypes.DATE,
+            defaultValue: DataTypes.NOW,
             comment: '创建时间'
         },
         update_time: {
             type: DataTypes.DATE,
+            defaultValue: DataTypes.NOW,
             comment: '更新时间'
         }
     })
